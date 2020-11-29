@@ -64,6 +64,38 @@ def binary_tree(L):
     """ 第四位任務：
         將 L1’ 與 L2’ 交集後的結果建成 binary tree(盡可能平衡) 並輸出
     """
+    class binarytree:
+          def __init__(self, val):
+              self.val=val
+              self.left=None
+              self.right=None
+          def insert(self,val):
+              if val<self.val:
+                  if self.left==None:
+                      self.left=binarytree(val)
+                  else:
+                      self.left.insert(val)
+              else:
+                  if self.right==None:
+                      self.right=binarytree(val)
+                  else:
+                      self.right.insert(val)
+          def PrintTree(self):
+              if self.left:
+                  self.left.PrintTree()
+              print( self.val,end=" ")
+              if self.right:
+                  self.right.PrintTree()
+
+    L = set(L1).intersection(set(L2))
+    L=list(L)
+    L.sort()
+    root=binarytree(L[int(len(L)/2)])
+    del L[int(len(L)/2)]
+    for i in range(len(L)):
+          root.insert(L[i])
+    root.PrintTree()
+    print()
     pass
 
 
