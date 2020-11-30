@@ -1,5 +1,28 @@
 import hashlib
 
+class binarytree:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+    def PrintTree(self):
+        if self.left:
+            print('1')
+            self.left.PrintTree()
+        print(self.val,end=" ")
+        if self.right:
+            print('2')
+            self.right.PrintTree()
+     
+def sortedbst(L):
+    if not L:
+        return None
+    midval = len(L) // 2
+    root = binarytree(L[midval])
+    root.left = sortedbst(L[:midval])
+    root.right = sortedbst(L[midval + 1:])
+    return root
+
 L1 = [8184, 6142, 5299, 5084, 459, 7072, 9702, 7469, 2543, 3581, 3740, 7167, 6507, 1981, 2744, 5409, 1787, 4733, 9578,
       2733, 4165, 7558, 6436, 4160, 7676, 9229, 6920, 1234, 2885, 3663, 5195, 2559, 1751, 6325, 8220, 4555, 8155, 6889,
       6601, 4054, 8533, 2931, 5566, 7461, 3256, 2272, 4314, 2991, 8327, 4176, 7090, 3258, 2275, 8283, 4477, 579, 6428,
@@ -64,40 +87,12 @@ def binary_tree(L):
     """ 第四位任務：
         將 L1’ 與 L2’ 交集後的結果建成 binary tree(盡可能平衡) 並輸出
     """
-    class binarytree:
-          def __init__(self, val):
-              self.val=val
-              self.left=None
-              self.right=None
-          def insert(self,val):
-              if val<self.val:
-                  if self.left==None:
-                      self.left=binarytree(val)
-                  else:
-                      self.left.insert(val)
-              else:
-                  if self.right==None:
-                      self.right=binarytree(val)
-                  else:
-                      self.right.insert(val)
-          def PrintTree(self):
-              if self.left:
-                  self.left.PrintTree()
-              print( self.val,end=" ")
-              if self.right:
-                  self.right.PrintTree()
-
     L = set(L1).intersection(set(L2))
     L=list(L)
     L.sort()
-    root=binarytree(L[int(len(L)/2)])
-    del L[int(len(L)/2)]
-    for i in range(len(L)):
-          root.insert(L[i])
-    root.PrintTree()
-    print()
+    result = sortedbst(L)
+    result.PrintTree()
     pass
-
 
 if __name__ == "__main__":
     """ main program here """
