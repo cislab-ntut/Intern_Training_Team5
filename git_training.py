@@ -29,7 +29,15 @@ def L1_sort(L):
     """ 第一位任務：
         將 L1 進行升序排序，排序演算法不限，唯禁止使用內建或第三方函式庫的 sort
     """
+    for i in range(len(L)-1):
+        for k in range(len(L)-1-i):
+            if L[k] > L[k+1]:
+                temp = L[k]
+                L[k] = L[k+1]
+                L[k+1] = temp
 
+    # for i in range(len(L)):
+        # print(L[i])
     return L
 
 
